@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { User } from './../user';
 
 @Component({
@@ -8,7 +8,7 @@ import { User } from './../user';
 })
 export class RegisterComponent implements OnInit {
   newUser: User = new User("Kobe", 'goat');
-  users: User[] = [];
+  @Output() registerEventEmitter = new EventEmitter();
 
   constructor() { }
 
@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   }
   onSubmit(){
   	console.log(this.newUser);
-  	this.users.push(this.newUser);
+    this.registerEventEmitter.emit(this.newUser);
   	this.newUser = new User();
   }
 }
